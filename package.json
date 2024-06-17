@@ -1,7 +1,7 @@
 {
   "name": "@JIY00N2/jy-ds",
   "private": false,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Design Systems using React Components",
   "keywords": [
     "react",
@@ -16,6 +16,7 @@
     "type": "git",
     "url": "https://github.com/JIY00N2/jy-ds.git"
   },
+  "license": "MIT",
   "type": "module",
   "files": [
     "dist"
