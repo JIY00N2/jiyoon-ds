@@ -1,7 +1,21 @@
 {
-  "name": "jy-ds",
+  "name": "@JIY00N2/jy-ds",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "description": "Design Systems using React Components",
+  "keywords": [
+    "react",
+    "components",
+    "design systems"
+  ],
+  "author": {
+    "name": "jiyoon",
+    "email": "angella990825@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JIY00N2/jy-ds"
+  },
   "type": "module",
   "files": [
     "dist"
