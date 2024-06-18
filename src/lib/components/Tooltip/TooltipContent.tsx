@@ -1,7 +1,6 @@
 import { ComponentProps } from 'react';
 import { createPortal } from 'react-dom';
 import { useTooltipContext } from './contexts/TooltipContext';
-import { useClient } from '../../hooks/useClient';
 
 export const TooltipContent = ({
   children,
@@ -16,7 +15,6 @@ export const TooltipContent = ({
     handleTooltipMouseOut,
     forceInvisible,
   } = useTooltipContext();
-  const isClient = useClient();
 
   if (forceInvisible) {
     return <></>;
@@ -24,8 +22,7 @@ export const TooltipContent = ({
 
   return (
     <>
-      {isClient &&
-        isTooltipVisible &&
+      {isTooltipVisible &&
         createPortal(
           <div
             {...props}
