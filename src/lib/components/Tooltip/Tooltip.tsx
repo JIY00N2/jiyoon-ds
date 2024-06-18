@@ -12,7 +12,7 @@ import { TooltipContent } from './TooltipContent';
 import { getArrowShape } from '../../utils/getArrowShape';
 import { TooltipTrigger } from './TooltipTrigger';
 import { TooltipDirectionToArrowDirectionMap } from './constants/converter';
-import { useClientRect } from '../../hooks/useClient';
+import { useClientRect } from '../../hooks/useClientRect';
 import { getTooltipPosition } from './utils/getTooltipPosition';
 import { getArrowPosition } from './utils/getArrowPosition';
 
