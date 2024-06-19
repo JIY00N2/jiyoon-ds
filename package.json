@@ -1,7 +1,7 @@
 {
   "name": "jiyoon-ds",
   "private": false,
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Design Systems using React Components",
   "keywords": [
     "react",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/JIY00N2/yoon-ds.git"
+    "url": "https://github.com/JIY00N2/jiyoon-ds.git"
   },
   "homepage": "https://jiyoon-ds-web.vercel.app/",
   "license": "MIT",
