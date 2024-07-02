@@ -1,12 +1,14 @@
 import { ComponentProps } from 'react';
 import { createPortal } from 'react-dom';
 import { useTooltipContext } from './contexts/TooltipContext';
+import { useMobile } from '../../hooks/useMobile';
 
 export const TooltipContent = ({
   children,
   style,
   ...props
 }: ComponentProps<'div'>) => {
+  const isMobile = useMobile();
   const {
     isTooltipVisible,
     position,
@@ -16,7 +18,7 @@ export const TooltipContent = ({
     forceInvisible,
   } = useTooltipContext();
 
-  if (forceInvisible) {
+  if (forceInvisible || isMobile) {
     return <></>;
   }
 
