@@ -145,7 +145,7 @@ const _Tooltip = ({
   }, [hoverVisible]);
 
   useEffect(() => {
-    if (!triggerContainerRef.current || !tooltipRect) {
+    if (!triggerContainerRef.current || !tooltipRect || isMobile) {
       return;
     }
 
