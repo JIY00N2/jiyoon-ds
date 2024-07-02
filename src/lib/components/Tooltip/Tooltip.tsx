@@ -15,6 +15,7 @@ import { TooltipDirectionToArrowDirectionMap } from './constants/converter';
 import { useClientRect } from '../../hooks/useClientRect';
 import { getTooltipPosition } from './utils/getTooltipPosition';
 import { getArrowPosition } from './utils/getArrowPosition';
+import { useMobile } from '../../hooks/useMobile';
 
 export type PositionType = {
   top?: number;
@@ -82,7 +83,13 @@ const _Tooltip = ({
 
   const [tooltipRect, tooltipCallbackRef] = useClientRect<HTMLDivElement>();
 
+  const isMobile = useMobile();
+
   const handleTriggerMouseOver = useCallback(() => {
+    if (isMobile) {
+      return;
+    }
+
     clearTimeout(enterDelayTimeoutRef.current);
     clearTimeout(leaveDelayTimeoutRef.current);
 
@@ -93,6 +100,10 @@ const _Tooltip = ({
   }, [enterDelay]);
 
   const handleTriggerMouseOut = useCallback(() => {
+    if (isMobile) {
+      return;
+    }
+
     clearTimeout(enterDelayTimeoutRef.current);
     clearTimeout(leaveDelayTimeoutRef.current);
 
@@ -108,6 +119,10 @@ const _Tooltip = ({
   }, [leaveDelay, hoverVisible]);
 
   const handleTooltipMouseOver = useCallback(() => {
+    if (isMobile) {
+      return;
+    }
+
     if (!hoverVisible) {
       return;
     }
@@ -119,6 +134,10 @@ const _Tooltip = ({
   }, [hoverVisible]);
 
   const handleTooltipMouseOut = useCallback(() => {
+    if (isMobile) {
+      return;
+    }
+
     if (!hoverVisible) {
       return;
     }
