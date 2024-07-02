@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  font-size: 20px;
+}
+
+a {
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 8px;
+  border: 2px solid rgb(36, 143, 197);
+  background-color: rgb(255, 255, 255);
+  color: rgb(36, 143, 197);
+  width: 200px;
+  text-align: center;
+}
