@@ -1,30 +1,34 @@
-# React + TypeScript + Vite
+# `JY DS`
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+JY DS is an open-source UI component library created by the author [JIY00N2](https://github.com/JIY00N2).
 
-Currently, two official plugins are available:
+## Usage
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```jsx
+import { Tooltip } from 'jiyoon-ds';
+import styles from './Tooltip.module.css';
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+export const Tooltip = () => {
+  return (
+    <Tooltip.Root direction='topLeft' offset={5} enterDelay={1000}>
+      <Tooltip.Trigger>
+        <div className={styles.trigger}>enterDelay 1s</div>
+      </Tooltip.Trigger>
+      <Tooltip.Content className={styles.blackContent}>
+        <Tooltip.Arrow style={{ marginLeft: '10px' }} />
+        <span>content example1</span>
+        <span>content example2</span>
+        <span>content example3</span>
+      </Tooltip.Content>
+    </Tooltip.Root>
+  );
+};
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Documentation
+
+See https://jiyoon-ds-web.vercel.app/
+
+## Contact
+
+angella990825@gmail.com
