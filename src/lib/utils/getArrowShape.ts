@@ -1,8 +1,9 @@
-export type ArrowDirectionType = 'top' | 'left' | 'right' | 'bottom';
+export type ArrowDirectionType = "top" | "left" | "right" | "bottom";
+
 type GetArrowShape = (
   direction: ArrowDirectionType,
   offset: number,
-  arrowColor: string
+  arrowColor: string,
 ) => {
   borderTop?: string;
   borderLeft?: string;
@@ -12,25 +13,25 @@ type GetArrowShape = (
 
 export const getArrowShape: GetArrowShape = (direction, offset, arrowColor) => {
   switch (direction) {
-    case 'top':
+    case "top":
       return {
         borderTop: `${offset}px solid ${arrowColor}`,
         borderLeft: `${offset}px solid transparent`,
         borderRight: `${offset}px solid transparent`,
       };
-    case 'left':
+    case "left":
       return {
         borderTop: `${offset}px solid transparent`,
         borderLeft: `${offset}px solid ${arrowColor}`,
         borderBottom: `${offset}px solid transparent`,
       };
-    case 'right':
+    case "right":
       return {
         borderTop: `${offset}px solid transparent`,
         borderRight: `${offset}px solid ${arrowColor}`,
         borderBottom: `${offset}px solid transparent`,
       };
-    case 'bottom':
+    case "bottom":
       return {
         borderLeft: `${offset}px solid transparent`,
         borderRight: `${offset}px solid transparent`,

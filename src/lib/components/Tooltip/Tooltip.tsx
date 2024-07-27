@@ -4,48 +4,32 @@ import {
   useEffect,
   useRef,
   useState,
-} from 'react';
+} from "react";
 
-import { TooltipContextProvider } from './contexts/TooltipContext';
-import { TooltipArrow } from './TooltipArrow';
-import { TooltipContent } from './TooltipContent';
-import { getArrowShape } from '../../utils/getArrowShape';
-import { TooltipTrigger } from './TooltipTrigger';
-import { TooltipDirectionToArrowDirectionMap } from './constants/converter';
-import { useClientRect } from '../../hooks/useClientRect';
-import { getTooltipPosition } from './utils/getTooltipPosition';
-import { getArrowPosition } from './utils/getArrowPosition';
-
-export type PositionType = {
-  top?: number;
-  left?: number;
-};
-
-export type ArrowPositionType = {
-  bottom?: number;
-  left?: number;
-};
-
-export type ArrowShapeType = {
-  borderTop?: string;
-  borderLeft?: string;
-  borderRight?: string;
-  borderBottom?: string;
-};
+import { TooltipContextProvider } from "./contexts/TooltipContext";
+import { TooltipArrow } from "./TooltipArrow";
+import { TooltipContent } from "./TooltipContent";
+import { getArrowShape } from "../../utils/getArrowShape";
+import { TooltipTrigger } from "./TooltipTrigger";
+import { TooltipDirectionToArrowDirectionMap } from "./constants/converter";
+import { useClientRect } from "../../hooks/useClientRect";
+import { getArrowPosition } from "../../utils/getArrowPosition";
+import { ArrowPositionType, ArrowShapeType, PositionType } from "../../types";
+import { getContentPosition } from "../../utils/getContentPosition.ts";
 
 export type DirectionType =
-  | 'top'
-  | 'left'
-  | 'right'
-  | 'bottom'
-  | 'topLeft'
-  | 'topRight'
-  | 'bottomLeft'
-  | 'bottomRight'
-  | 'leftTop'
-  | 'leftBottom'
-  | 'rightTop'
-  | 'rightBottom';
+  | "top"
+  | "left"
+  | "right"
+  | "bottom"
+  | "topLeft"
+  | "topRight"
+  | "bottomLeft"
+  | "bottomRight"
+  | "leftTop"
+  | "leftBottom"
+  | "rightTop"
+  | "rightBottom";
 
 type TooltipProps = PropsWithChildren<{
   direction: DirectionType;
@@ -66,7 +50,7 @@ const _Tooltip = ({
   enterDelay = 0,
   leaveDelay = 0,
   hoverVisible = false,
-  arrowColor = 'black',
+  arrowColor = "black",
   forceInvisible = false,
 }: TooltipProps) => {
   const margin = initialMargin ? offset + initialMargin : offset * 2;
@@ -88,7 +72,7 @@ const _Tooltip = ({
 
     enterDelayTimeoutRef.current = setTimeout(
       () => setIsTooltipVisible(true),
-      enterDelay
+      enterDelay,
     );
   }, [enterDelay]);
 
@@ -97,9 +81,12 @@ const _Tooltip = ({
     clearTimeout(leaveDelayTimeoutRef.current);
 
     if (hoverVisible) {
-      leaveDelayTimeoutRef.current = setTimeout(() => {
-        setIsTooltipVisible(false);
-      }, Math.max(200, leaveDelay));
+      leaveDelayTimeoutRef.current = setTimeout(
+        () => {
+          setIsTooltipVisible(false);
+        },
+        Math.max(200, leaveDelay),
+      );
     } else {
       leaveDelayTimeoutRef.current = setTimeout(() => {
         setIsTooltipVisible(false);
@@ -133,15 +120,18 @@ const _Tooltip = ({
     const trigger = triggerContainerRef.current;
     const triggerRect = trigger.getBoundingClientRect();
 
+    // setPosition(
+    //   getTooltipPosition(direction, triggerRect, tooltipRect, margin),
+    // );
     setPosition(
-      getTooltipPosition(direction, triggerRect, tooltipRect, margin)
+      getContentPosition(direction, triggerRect, tooltipRect, margin),
     );
     setArrowShape(
       getArrowShape(
         TooltipDirectionToArrowDirectionMap[direction],
         offset,
-        arrowColor
-      )
+        arrowColor,
+      ),
     );
     setArrowPosition(getArrowPosition(direction, tooltipRect, offset));
   }, [direction, tooltipRect, margin, offset, arrowColor]);

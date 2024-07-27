@@ -5,8 +5,12 @@ import {
   RefObject,
   createContext,
   useContext,
-} from 'react';
-import { ArrowPositionType, ArrowShapeType, PositionType } from '../Tooltip';
+} from "react";
+import {
+  ArrowPositionType,
+  ArrowShapeType,
+  PositionType,
+} from "../../../types";
 
 type TooltipContextValue = {
   arrowPosition: ArrowPositionType;
@@ -28,7 +32,7 @@ export const useTooltipContext = () => {
   const value = useContext(TooltipContext);
 
   if (value === null) {
-    throw Error('Cannot find TooltipContext');
+    throw Error("Cannot find TooltipContext");
   }
 
   return value;
