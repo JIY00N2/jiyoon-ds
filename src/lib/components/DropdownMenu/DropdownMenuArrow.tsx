@@ -9,7 +9,6 @@ export const DropdownMenuArrow = ({
 
   return (
     <div
-      {...props}
       style={{
         borderTop: `${arrowShape.borderTop}`,
         borderLeft: `${arrowShape.borderLeft}`,
@@ -20,6 +19,7 @@ export const DropdownMenuArrow = ({
         left: `${arrowPosition.left}px` || undefined,
         ...style,
       }}
+      {...props}
     />
   );
 };

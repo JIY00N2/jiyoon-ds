@@ -14,8 +14,8 @@ export const DropdownMenuSubTrigger = ({
       ref={subTriggerRef}
       onMouseOver={handleSubTriggerMouseOver}
       onMouseOut={handleSubTriggerMouseOut}
-      {...props}
       style={{ position: "relative", ...style }}
+      {...props}
     >
       {children}
     </div>

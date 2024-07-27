@@ -1,11 +1,11 @@
-import { ComponentProps } from 'react';
-import { useModalContext } from './contexts/ModalContext';
+import { ComponentProps } from "react";
+import { useModalContext } from "./contexts/ModalContext";
 
 export const ModalContent = ({
   children,
   style,
   ...props
-}: ComponentProps<'div'>) => {
+}: ComponentProps<"div">) => {
   const { modalContentRef, isOpen } = useModalContext();
 
   if (!isOpen) {
@@ -39,9 +39,9 @@ export const ModalContent = ({
       </style>
       <div
         ref={modalContentRef}
-        {...props}
-        className='modal-content'
+        className="modal-content"
         style={{ ...style }}
+        {...props}
       >
         {children}
       </div>

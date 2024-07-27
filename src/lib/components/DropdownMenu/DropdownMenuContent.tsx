@@ -17,7 +17,6 @@ export const DropdownMenuContent = ({
     <>
       {(isOpen || defaultOpen) && (
         <div
-          {...props}
           ref={contentRef}
           style={{
             display: "flex",
@@ -28,6 +27,7 @@ export const DropdownMenuContent = ({
             left: `${position.left}px` || undefined,
             ...style,
           }}
+          {...props}
         >
           {children}
         </div>

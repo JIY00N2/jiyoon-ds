@@ -12,8 +12,8 @@ export const DropdownMenuTrigger = ({
     <div
       ref={triggerRef}
       onClick={toggle}
-      {...props}
       style={{ position: "relative", ...style }}
+      {...props}
     >
       {children}
     </div>

@@ -1,7 +1,7 @@
-import { ComponentProps } from 'react';
-import { useModalContext } from './contexts/ModalContext';
+import { ComponentProps } from "react";
+import { useModalContext } from "./contexts/ModalContext";
 
-export const ModalOverlay = ({ style, ...props }: ComponentProps<'div'>) => {
+export const ModalOverlay = ({ style, ...props }: ComponentProps<"div">) => {
   const { isOpen } = useModalContext();
 
   if (!isOpen) {
@@ -10,13 +10,13 @@ export const ModalOverlay = ({ style, ...props }: ComponentProps<'div'>) => {
 
   return (
     <div
-      {...props}
       style={{
-        backgroundColor: 'rgba(0, 0, 0, 0.4)',
-        position: 'fixed',
-        inset: '0px',
+        backgroundColor: "rgba(0, 0, 0, 0.4)",
+        position: "fixed",
+        inset: "0px",
         ...style,
       }}
+      {...props}
     />
   );
 };

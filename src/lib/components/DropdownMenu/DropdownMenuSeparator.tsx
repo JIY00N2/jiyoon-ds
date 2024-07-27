@@ -16,12 +16,12 @@ export const DropdownMenuSeparator = ({
 
   return (
     <div
-      {...props}
       style={{
         ...orientationStyle,
         backgroundColor: "black",
         ...style,
       }}
+      {...props}
     />
   );
 };

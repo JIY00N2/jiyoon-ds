@@ -1,20 +1,20 @@
-import { ComponentProps } from 'react';
-import { useTooltipContext } from './contexts/TooltipContext';
+import { ComponentProps } from "react";
+import { useTooltipContext } from "./contexts/TooltipContext";
 
 export const TooltipTrigger = ({
   children,
   style,
   ...props
-}: ComponentProps<'div'>) => {
+}: ComponentProps<"div">) => {
   const { triggerRef, handleTriggerMouseOver, handleTriggerMouseOut } =
     useTooltipContext();
   return (
     <div
-      {...props}
-      style={{ position: 'relative', ...style }}
+      style={{ position: "relative", ...style }}
       ref={triggerRef}
       onMouseOver={handleTriggerMouseOver}
       onMouseOut={handleTriggerMouseOut}
+      {...props}
     >
       {children}
     </div>

@@ -7,8 +7,8 @@ export const DropdownMenuItem = ({
 }: ComponentProps<"div">) => {
   return (
     <div
-      {...props}
       style={{ ...style }}
+      {...props}
     >
       {children}
     </div>

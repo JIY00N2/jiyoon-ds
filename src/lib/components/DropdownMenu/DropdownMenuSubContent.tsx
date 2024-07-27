@@ -23,7 +23,6 @@ export const DropdownMenuSubContent = ({
     <>
       {isOpen && (
         <div
-          {...props}
           ref={subContentRef}
           onMouseOver={handleSubContentMouseOver}
           onMouseOut={handleSubContentMouseOut}
@@ -36,6 +35,7 @@ export const DropdownMenuSubContent = ({
             left: `${subPosition.left}px` || undefined,
             ...style,
           }}
+          {...props}
         >
           {children}
         </div>

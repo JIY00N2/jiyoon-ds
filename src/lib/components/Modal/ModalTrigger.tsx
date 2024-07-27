@@ -1,15 +1,19 @@
-import { ComponentProps } from 'react';
-import { useModalContext } from './contexts/ModalContext';
+import { ComponentProps } from "react";
+import { useModalContext } from "./contexts/ModalContext";
 
 export const ModalTrigger = ({
   children,
   style,
   ...props
-}: ComponentProps<'div'>) => {
+}: ComponentProps<"div">) => {
   const { open } = useModalContext();
 
   return (
-    <div onClick={open} {...props} style={{ ...style }}>
+    <div
+      onClick={open}
+      style={{ ...style }}
+      {...props}
+    >
       {children}
     </div>
   );
