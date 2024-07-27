@@ -6,11 +6,11 @@ import {
   useCallback,
 } from "react";
 import { useBoolean } from "../../hooks/useBoolean.ts";
-import { useClientRect } from "../../hooks/useClientRect.ts";
 import { DropdownMenuSubContextProvider } from "./contexts/DropdownMenuSubContext.tsx";
 import { DirectionType } from "./DropdownMenu.tsx";
 import { PositionType } from "../../types";
 import { getContentPosition } from "../../utils/getContentPosition.ts";
+import { useCallbackRef } from "../../hooks/useCallbackRef.ts";
 
 export type AlignType = "left" | "center" | "right";
 
@@ -27,8 +27,9 @@ export const DropdownMenuSub = ({
   align = "center",
 }: DropdownMenuProps) => {
   const subTriggerRef = useRef<HTMLDivElement | null>(null);
-  const [subContentRect, subContentCallbackRef] =
-    useClientRect<HTMLDivElement>();
+
+  const [subContentEl, subContentCallbackRef] =
+    useCallbackRef<HTMLDivElement>();
   const [subPosition, setSubPosition] = useState<PositionType>({});
 
   const leaveDelayTimeoutRef = useRef<ReturnType<typeof setInterval>>(-1);
@@ -60,16 +61,17 @@ export const DropdownMenuSub = ({
   }, [close]);
 
   useEffect(() => {
-    if (!subTriggerRef.current || !subContentRect) {
+    if (!subTriggerRef.current || !subContentEl) {
       return;
     }
     const subTrigger = subTriggerRef.current;
     const subTriggerRect = subTrigger.getBoundingClientRect();
+    const subContentRect = subContentEl.getBoundingClientRect();
 
     setSubPosition(
       getContentPosition(direction, subTriggerRect, subContentRect, margin),
     );
-  }, [direction, margin, subContentRect]);
+  }, [direction, margin, subContentEl]);
 
   return (
     <DropdownMenuSubContextProvider

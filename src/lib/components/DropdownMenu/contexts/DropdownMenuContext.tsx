@@ -14,7 +14,7 @@ import {
 
 type DropdownMenuContextValue = {
   triggerRef: RefObject<HTMLDivElement>;
-  contentRef: RefCallback<HTMLDivElement>;
+  contentRef: RefCallback<HTMLDivElement> | null;
   isOpen: boolean;
   defaultOpen: boolean;
   toggle: VoidFunction;

@@ -12,10 +12,10 @@ import { TooltipContent } from "./TooltipContent";
 import { getArrowShape } from "../../utils/getArrowShape";
 import { TooltipTrigger } from "./TooltipTrigger";
 import { TooltipDirectionToArrowDirectionMap } from "./constants/converter";
-import { useClientRect } from "../../hooks/useClientRect";
 import { getArrowPosition } from "../../utils/getArrowPosition";
 import { ArrowPositionType, ArrowShapeType, PositionType } from "../../types";
 import { getContentPosition } from "../../utils/getContentPosition.ts";
+import { useCallbackRef } from "../../hooks/useCallbackRef.ts";
 
 export type DirectionType =
   | "top"
@@ -64,7 +64,7 @@ const _Tooltip = ({
   const [arrowShape, setArrowShape] = useState<ArrowShapeType>({});
   const [position, setPosition] = useState<PositionType>({});
 
-  const [tooltipRect, tooltipCallbackRef] = useClientRect<HTMLDivElement>();
+  const [tooltipEl, tooltipCallbackRef] = useCallbackRef<HTMLDivElement>();
 
   const handleTriggerMouseOver = useCallback(() => {
     clearTimeout(enterDelayTimeoutRef.current);
@@ -113,16 +113,14 @@ const _Tooltip = ({
   }, [hoverVisible]);
 
   useEffect(() => {
-    if (!triggerContainerRef.current || !tooltipRect) {
+    if (!triggerContainerRef.current || !tooltipEl) {
       return;
     }
 
     const trigger = triggerContainerRef.current;
     const triggerRect = trigger.getBoundingClientRect();
+    const tooltipRect = tooltipEl.getBoundingClientRect();
 
-    // setPosition(
-    //   getTooltipPosition(direction, triggerRect, tooltipRect, margin),
-    // );
     setPosition(
       getContentPosition(direction, triggerRect, tooltipRect, margin),
     );
@@ -134,7 +132,7 @@ const _Tooltip = ({
       ),
     );
     setArrowPosition(getArrowPosition(direction, tooltipRect, offset));
-  }, [direction, tooltipRect, margin, offset, arrowColor]);
+  }, [direction, tooltipEl, margin, offset, arrowColor]);
 
   return (
     <TooltipContextProvider

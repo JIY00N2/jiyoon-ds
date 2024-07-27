@@ -9,12 +9,12 @@ import { DropdownMenuSub } from "./DropdownMenuSub.tsx";
 import { DropdownMenuSubTrigger } from "./DropdownMenuSubTrigger.tsx";
 import { DropdownMenuSubContent } from "./DropdownMenuSubContent.tsx";
 import { useBoolean } from "../../hooks/useBoolean.ts";
-import { useClientRect } from "../../hooks/useClientRect.ts";
 import { DropdownMenuArrow } from "./DropdownMenuArrow.tsx";
 import { getArrowShape } from "../../utils/getArrowShape.ts";
 import { getArrowPosition } from "../../utils/getArrowPosition.ts";
 import { ArrowPositionType, ArrowShapeType, PositionType } from "../../types";
 import { getContentPosition } from "../../utils/getContentPosition.ts";
+import { useCallbackRef } from "../../hooks/useCallbackRef.ts";
 
 export type AlignType = "left" | "center" | "right";
 
@@ -42,20 +42,22 @@ const _DropdownMenu = ({
 }: DropdownMenuProps) => {
   const margin = initialMargin ? offset + initialMargin : offset * 2;
   const triggerRef = useRef<HTMLDivElement | null>(null);
-  const [contentRect, contentCallbackRef] = useClientRect<HTMLDivElement>();
   const [position, setPosition] = useState<PositionType>({});
   const [arrowShape, setArrowShape] = useState<ArrowShapeType>({});
   const [arrowPosition, setArrowPosition] = useState<ArrowPositionType>({});
 
-  const { value: isOpen, toggle } = useBoolean();
+  const { value: isOpen, setFalse: close, toggle } = useBoolean();
+
+  const [element, elementCallbackRef] = useCallbackRef<HTMLDivElement>();
 
   useEffect(() => {
-    if (!triggerRef.current || !contentRect) {
+    if (!triggerRef.current || !element) {
       return;
     }
 
     const trigger = triggerRef.current;
     const triggerRect = trigger.getBoundingClientRect();
+    const contentRect = element.getBoundingClientRect();
 
     setPosition(
       getContentPosition(direction, triggerRect, contentRect, margin),
@@ -64,13 +66,35 @@ const _DropdownMenu = ({
     setArrowPosition(getArrowPosition(direction, contentRect, offset));
 
     setArrowShape(getArrowShape(direction, offset, arrowColor));
-  }, [arrowColor, contentRect, direction, margin, offset]);
+  }, [arrowColor, direction, element, margin, offset]);
+
+  useEffect(() => {
+    const handleMouseDown = (event: MouseEvent) => {
+      if (!(event.target instanceof HTMLElement)) {
+        return;
+      }
+
+      if (triggerRef.current?.contains(event.target)) {
+        return;
+      }
+
+      if (!element?.contains(event.target)) {
+        close();
+      }
+    };
+
+    document.addEventListener("mousedown", handleMouseDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handleMouseDown);
+    };
+  }, [close, element]);
 
   return (
     <DropdownMenuContextProvider
       value={{
         triggerRef,
-        contentRef: contentCallbackRef,
+        contentRef: elementCallbackRef,
         isOpen,
         defaultOpen,
         toggle,

@@ -35,7 +35,6 @@ export default function App() {
       </Modal.Root>
       <DropdownMenu.Root
         align={"right"}
-        defaultOpen={true}
         offset={5}
         direction={"bottom"}
       >
